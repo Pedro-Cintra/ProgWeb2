@@ -1,0 +1,205 @@
+{
+  "Classes": [
+    {
+      "Name": "Atividade",
+      "Properties": [
+        {
+          "Name": "IdStatusNavigation",
+          "NewName": "Status"
+        },
+        {
+          "Name": "IdSubProcessoNavigation",
+          "NewName": "SubProcesso"
+        },
+        {
+          "Name": "IdTelaNavigation",
+          "NewName": "TelaRadar"
+        }
+      ]
+    },
+    {
+      "Name": "Entrada",
+      "Properties": [
+        {
+          "Name": "Relacaosubprocesso",
+          "NewName": "RelacoesSubProcesso"
+        },
+        {
+          "Name": "Subprocessoentrada",
+          "NewName": "SubProcessosEntrada"
+        }
+      ]
+    },
+    {
+      "Name": "MacroProcesso",
+      "Properties": [
+        {
+          "Name": "IdStatusNavigation",
+          "NewName": "Status"
+        },
+        {
+          "Name": "Processo",
+          "NewName": "Processos"
+        }
+      ]
+    },
+    {
+      "Name": "Premissa",
+      "Properties": [
+        {
+          "Name": "Relacaosubprocesso",
+          "NewName": "RelacoesSubProcesso"
+        },
+        {
+          "Name": "Subprocessopremissa",
+          "NewName": "SubProcessosPremissa"
+        }
+      ]
+    },
+    {
+      "Name": "Processo",
+      "Properties": [
+        {
+          "Name": "IdMacroProcessoNavigation",
+          "NewName": "MacroProcesso"
+        },
+        {
+          "Name": "IdStatusNavigation",
+          "NewName": "Status"
+        },
+        {
+          "Name": "Subprocesso",
+          "NewName": "Subprocessos"
+        }
+      ]
+    },
+    {
+      "Name": "RelacaoSubProcesso",
+      "Properties": [
+        {
+          "Name": "IdEntradaNavigation",
+          "NewName": "Entrada"
+        },
+        {
+          "Name": "IdPremissaNavigation",
+          "NewName": "Premissa"
+        },
+        {
+          "Name": "IdSaidaNavigation",
+          "NewName": "Saida"
+        }
+      ]
+    },
+    {
+      "Name": "Saida",
+      "Properties": [
+        {
+          "Name": "Relacaosubprocesso",
+          "NewName": "RelacoesSubProcesso"
+        },
+        {
+          "Name": "Subprocessosaida",
+          "NewName": "SubProcessosSaida"
+        }
+      ]
+    },
+    {
+      "Name": "Status",
+      "Properties": [
+        {
+          "Name": "Atividade",
+          "NewName": "Atividades"
+        },
+        {
+          "Name": "MacroProcesso",
+          "NewName": "MacroProcessos"
+        },
+        {
+          "Name": "Processo",
+          "NewName": "Processos"
+        },
+        {
+          "Name": "SubProcesso",
+          "NewName": "SubProcessos"
+        }
+      ]
+    },
+    {
+      "Name": "SubProcesso",
+      "Properties": [
+        {
+          "Name": "Atividade",
+          "NewName": "Atividades"
+        },
+        {
+          "Name": "IdProcessoNavigation",
+          "NewName": "Processo"
+        },
+        {
+          "Name": "IdStatusNavigation",
+          "NewName": "Status"
+        },
+        {
+          "Name": "SubProcessoEntrada",
+          "NewName": "SubProcessosEntrada"
+        },
+        {
+          "Name": "SubProcessoPremissa",
+          "NewName": "SubProcessosPremissa"
+        },
+        {
+          "Name": "SubProcessoSaida",
+          "NewName": "SubProcessosSaida"
+        }
+      ]
+    },
+    {
+      "Name": "SubProcessoEntrada",
+      "Properties": [
+        {
+          "Name": "IdEntradaNavigation",
+          "NewName": "Entrada"
+        },
+        {
+          "Name": "IdSubProcessoNavigation",
+          "NewName": "SubProcesso"
+        }
+      ]
+    },
+    {
+      "Name": "SubProcessoPremissa",
+      "Properties": [
+        {
+          "Name": "IdPremissaNavigation",
+          "NewName": "Premissa"
+        },
+        {
+          "Name": "IdSubProcessoNavigation",
+          "NewName": "SubProcesso"
+        }
+      ]
+    },
+    {
+      "Name": "SubProcessoSaida",
+      "Properties": [
+        {
+          "Name": "IdSaidaNavigation",
+          "NewName": "Saida"
+        },
+        {
+          "Name": "IdSubProcessoNavigation",
+          "NewName": "SubProcesso"
+        }
+      ]
+    },
+    {
+      "Name": "TelaRadar",
+      "Properties": [
+        {
+          "Name": "Atividade",
+          "NewName": "Atividades"
+        }
+      ]
+    }
+  ]
+}

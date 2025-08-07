@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  progweb_api:
+    image: ${DOCKER_REGISTRY}/progweb_api:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: WebAPI/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-}
+      - ASPNETCORE_URLS=${ASPNETCORE_URLS:-}
+      - CONNECTION_STRING=${CONNECTION_STRING:-}
+      - TZ=${TIMEZONE:-}
+      - CLIENT_ID=${CLIENT_ID:-}
+      - CLIENT_SECRET=${CLIENT_SECRET:-}
+      - GRANT_TYPE=${GRANT_TYPE:-}
+      - API_EXTRANET=${API_EXTRANET:-}
+    ports:
+      - "5000:443"
+    restart: unless-stopped
+    healthcheck:
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+      test: curl -s https://localhost:5000/api/healthcheck | grep -q 'Healthy'
