@@ -19,7 +19,7 @@ public sealed class ServiceManager : IServiceManager
     )
     {
         _comandaService = new(() => new ComandaService(repositoryManager, mapper, logger));
-        _comandaItemService = new(() => new ComandaItemService(repositoryManager, mapper, logger));
+        _comandaItemService = new(() => new ComandaItemService(repositoryManager, mapper, logger, this));
         _usuarioService = new(() => new UsuarioService(repositoryManager, mapper, logger));
     }
 

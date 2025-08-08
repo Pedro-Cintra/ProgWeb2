@@ -46,21 +46,7 @@ public class MappingProfile : Profile
             );
         CreateMap<CreateComandaDto, Comanda>();
         CreateMap<ReadComandaDto, Comanda>();
-
-        //CreateMap<ComandaItem, ReadComandaProdutoDto>()
-        //    .ForMember(
-        //        dest => dest.Produto.Id,
-        //        opt => opt.MapFrom(src => src.Sequencia)
-        //    )
-        //    .ForMember(
-        //        dest => dest.Produto.Nome,
-        //        opt => opt.MapFrom(src => src.Produto)
-        //    )
-        //    .ForMember(
-        //        dest => dest.Produto.Preco,
-        //        opt => opt.MapFrom(src => src.Preco)
-        //    );
-
+        
         CreateMap<CreateComandaItemDto, ComandaItem>();
         CreateMap<ReadComandaItemDto, ComandaItem>();
     }
