@@ -59,15 +59,4 @@ public class ComandaItemService : IComandaItemService
 
         return retorno;
     }
-    
-    public async Task<ReadComandaItemDto> GetAsync(int id)
-    {
-        var comandaItem = await _repository.ComandaItem
-            .FindByCondition(c => c.Id == id, false)
-            .Include(ci => ci.Comanda)
-                .ThenInclude(c => c.Usuario)
-            .SingleOrDefaultAsync() ?? throw new ComandaNotFoundException(id);
-
-        return _mapper.Map<ReadComandaItemDto>(comandaItem);
-    }
 }

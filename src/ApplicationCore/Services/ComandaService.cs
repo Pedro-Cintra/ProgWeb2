@@ -4,6 +4,8 @@ using ApplicationCore.Interfaces;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Shared.Dtos.Comanda;
+using Shared.Dtos.ComandaItem;
+using Shared.Dtos.Produto;
 using Shared.Interfaces;
 
 namespace ApplicationCore.Services;
@@ -49,10 +51,28 @@ public class ComandaService : IComandaService
         return comanda;
     }
     
-    public async Task<ReadComandaDto> GetAsync(int id)
+    public async Task<ReadComandaItemDto> GetAsync(int id)
     {
-        var comanda = await GetAndCheckAsync(id);
+        var comanda = await _repository.Comanda
+            .FindByCondition(c => c.Id == id, false)
+            .Include(c => c.Usuario)
+            .Include(c => c.ComandaItems)
+            .SingleOrDefaultAsync() ?? throw new ComandaNotFoundException(id);
 
-        return _mapper.Map<ReadComandaDto>(comanda);
+        ReadComandaItemDto retorno = new()
+        { 
+            Id = comanda.Id,
+            IdUsuario = comanda.IdUsuario,
+            NomeUsuario = comanda.Usuario.Nome,
+            TelefoneUsuario = comanda.Usuario.Telefone,
+            Produtos = [.. comanda.ComandaItems.Select(p => new ProdutoDto
+            {
+                Id = p.Id,
+                Nome = p.Produto,
+                Preco = (decimal)p.Preco
+            })]
+        };
+
+        return retorno;
     }
 }

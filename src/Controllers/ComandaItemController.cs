@@ -28,12 +28,4 @@ public class ComandaItemController : APIControllerBase
         var retorno = await _service.ComandaItem.CreateAsync(parameters);
         return Ok(retorno);
     }
-    
-    [HttpGet("{id:int}")]
-    [ProducesResponseType(typeof(ReadComandaProdutoDto), StatusCodes.Status200OK)]
-    public async Task<IActionResult> Get(int id)
-    {
-        var retorno = await _service.ComandaItem.GetAsync(id);
-        return Ok(retorno);
-    }
 }

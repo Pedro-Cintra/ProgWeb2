@@ -9,4 +9,5 @@ public class Comanda
     [ForeignKey(nameof(Usuario))]
     public int IdUsuario { get; set; }
     public Usuario Usuario { get; set; }
+    public ICollection<ComandaItem> ComandaItems { get; set; } = new List<ComandaItem>();
 }
