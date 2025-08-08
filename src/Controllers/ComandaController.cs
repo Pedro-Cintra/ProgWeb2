@@ -10,15 +10,14 @@ namespace Controllers;
 
 [ApiController]
 [Route("[Controller]")]
-public class ComandaController: APIControllerBase
+public class ComandaController : APIControllerBase
 {
     private readonly IServiceManager _service;
-    private readonly IMemoryCache _cache;
 
     public ComandaController(IServiceManager service, IMemoryCache cache)
     {
-        _service = service;       
-    }    
+        _service = service;
+    }
 
     [HttpPost]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
@@ -26,6 +25,22 @@ public class ComandaController: APIControllerBase
     public async Task<IActionResult> Create([FromBody] CreateComandaDto parameters)
     {
         var retorno = await _service.Comanda.CreateAsync(parameters);
+        return Ok(retorno);
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<ReadComandaDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetAll()
+    {
+        var retorno = await _service.Comanda.GetAllAsync();
+        return Ok(retorno);
+    }
+    
+    [HttpGet("{id:int}")]
+    [ProducesResponseType(typeof(ReadComandaDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> Get(int id)
+    {
+        var retorno = await _service.Comanda.GetAsync(id);
         return Ok(retorno);
     }
 }

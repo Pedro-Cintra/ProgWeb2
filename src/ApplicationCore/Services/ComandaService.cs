@@ -1,10 +1,13 @@
 using ApplicationCore.Entities;
+using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Shared.Dtos.Comanda;
 using Shared.Interfaces;
 
 namespace ApplicationCore.Services;
+
 public class ComandaService : IComandaService
 {
     private readonly IRepositoryManager _repository;
@@ -23,6 +26,32 @@ public class ComandaService : IComandaService
 
         await _repository.Comanda.CreateAsync(comanda);
         await _repository.SaveAsync();
+
+        return _mapper.Map<ReadComandaDto>(comanda);
+    }
+
+    public async Task<IEnumerable<ReadComandaDto>> GetAllAsync()
+    {
+        var comandas = await _repository.Comanda
+            .FindAll(false)
+            .Include(c => c.Usuario)
+            .ToListAsync();
+
+        return _mapper.Map<IEnumerable<ReadComandaDto>>(comandas);
+    }
+
+    private async Task<Comanda> GetAndCheckAsync(int id, bool trackChanges = false)
+    {
+        var comanda = await _repository.Comanda
+            .FindByCondition(c => c.Id == id, trackChanges)
+            .SingleOrDefaultAsync() ?? throw new ComandaNotFoundException(id);
+
+        return comanda;
+    }
+    
+    public async Task<ReadComandaDto> GetAsync(int id)
+    {
+        var comanda = await GetAndCheckAsync(id);
 
         return _mapper.Map<ReadComandaDto>(comanda);
     }

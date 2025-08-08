@@ -13,9 +13,8 @@ namespace Controllers;
 public class UsuarioController: APIControllerBase
 {
     private readonly IServiceManager _service;
-    private readonly IMemoryCache _cache;
 
-    public UsuarioController(IServiceManager service, IMemoryCache cache)
+    public UsuarioController(IServiceManager service)
     {
         _service = service;       
     }    

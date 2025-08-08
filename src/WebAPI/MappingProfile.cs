@@ -35,11 +35,32 @@ public class MappingProfile : Profile
         CreateMap<CreateUsuarioDto, Usuario>();
         CreateMap<ReadUsuarioDto, Usuario>();
 
-        CreateMap<Comanda, ReadComandaDto>();
+        CreateMap<Comanda, ReadComandaDto>()
+            .ForMember(
+                dest => dest.NomeUsuario,
+                opt => opt.MapFrom(src => src.Usuario.Nome)
+            )
+            .ForMember(
+                dest => dest.TelefoneUsuario,
+                opt => opt.MapFrom(src => src.Usuario.Telefone)
+            );
         CreateMap<CreateComandaDto, Comanda>();
         CreateMap<ReadComandaDto, Comanda>();
 
-        CreateMap<ComandaItem, ReadComandaItemDto>();
+        //CreateMap<ComandaItem, ReadComandaProdutoDto>()
+        //    .ForMember(
+        //        dest => dest.Produto.Id,
+        //        opt => opt.MapFrom(src => src.Sequencia)
+        //    )
+        //    .ForMember(
+        //        dest => dest.Produto.Nome,
+        //        opt => opt.MapFrom(src => src.Produto)
+        //    )
+        //    .ForMember(
+        //        dest => dest.Produto.Preco,
+        //        opt => opt.MapFrom(src => src.Preco)
+        //    );
+
         CreateMap<CreateComandaItemDto, ComandaItem>();
         CreateMap<ReadComandaItemDto, ComandaItem>();
     }
