@@ -346,3 +346,4 @@
 /Users/pedrocintra/Projetos/ProgWeb2/src/WebAPI/obj/Debug/WebAPI.genruntimeconfig.cache
 /Users/pedrocintra/Projetos/ProgWeb2/src/WebAPI/obj/Debug/ref/WebAPI.dll
 /Users/pedrocintra/Projetos/ProgWeb2/src/WebAPI/bin/Debug/appsettings.Example.json
+/Users/pedrocintra/Projetos/ProgWeb2/src/WebAPI/obj/Debug/WebAPI.sourcelink.json

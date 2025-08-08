@@ -19,3 +19,4 @@
 /Users/pedrocintra/Projetos/ProgWeb2/src/Shared/obj/Debug/refint/Shared.dll
 /Users/pedrocintra/Projetos/ProgWeb2/src/Shared/obj/Debug/Shared.pdb
 /Users/pedrocintra/Projetos/ProgWeb2/src/Shared/obj/Debug/ref/Shared.dll
+/Users/pedrocintra/Projetos/ProgWeb2/src/Shared/obj/Debug/Shared.sourcelink.json

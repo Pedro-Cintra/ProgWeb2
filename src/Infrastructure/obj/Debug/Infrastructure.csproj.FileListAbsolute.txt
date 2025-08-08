@@ -33,3 +33,4 @@
 /Users/pedrocintra/Projetos/ProgWeb2/src/Infrastructure/obj/Debug/Infrastructure.pdb
 /Users/pedrocintra/Projetos/ProgWeb2/src/Infrastructure/obj/Debug/Infrastructure.genruntimeconfig.cache
 /Users/pedrocintra/Projetos/ProgWeb2/src/Infrastructure/obj/Debug/ref/Infrastructure.dll
+/Users/pedrocintra/Projetos/ProgWeb2/src/Infrastructure/obj/Debug/Infrastructure.sourcelink.json

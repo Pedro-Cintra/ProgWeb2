@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Infrastructure.Data;  // ajuste o namespace para onde está seu DbContext
+using Infrastructure.Data;
 
 public class ProgwebContextFactory : IDesignTimeDbContextFactory<progwebContext>
 {
@@ -8,7 +8,6 @@ public class ProgwebContextFactory : IDesignTimeDbContextFactory<progwebContext>
     {
         var builder = new DbContextOptionsBuilder<progwebContext>();
 
-        // copie a mesma connection string que está no appsettings ou nas variáveis:
         builder.UseNpgsql("Host=localhost;Database=postgres;Username=postgres;Password=mysecretpassword");
 
         return new progwebContext(builder.Options);

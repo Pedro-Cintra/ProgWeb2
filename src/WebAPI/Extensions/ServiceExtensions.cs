@@ -32,7 +32,7 @@ public static class ServiceExtensions
     {
         string connectionString = configuration.GetConnectionString("DefaultConnection");
         if (string.IsNullOrEmpty(connectionString))
-            connectionString = Environment.GetEnvironmentVariable("Host=localhost;Database=postgres;Username=posthres;Password=mysecretpassword");
+            connectionString = "Host=localhost;Database=postgres;Username=postgres;Password=mysecretpassword";
 
         services.AddDbContext<progwebContext>(options =>
         {

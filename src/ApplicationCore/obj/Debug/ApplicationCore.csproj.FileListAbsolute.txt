@@ -29,3 +29,4 @@
 /Users/pedrocintra/Projetos/ProgWeb2/src/ApplicationCore/obj/Debug/ApplicationCore.pdb
 /Users/pedrocintra/Projetos/ProgWeb2/src/ApplicationCore/obj/Debug/ApplicationCore.genruntimeconfig.cache
 /Users/pedrocintra/Projetos/ProgWeb2/src/ApplicationCore/obj/Debug/ref/ApplicationCore.dll
+/Users/pedrocintra/Projetos/ProgWeb2/src/ApplicationCore/obj/Debug/ApplicationCore.sourcelink.json

@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(progwebContext))]
-    [Migration("20250807014904_InitialCreate")]
+    [Migration("20250808153355_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -36,6 +36,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("Comanda");
                 });
@@ -62,6 +64,8 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdComanda");
+
                     b.ToTable("ComandaItem");
                 });
 
@@ -82,6 +86,28 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuario");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.Comanda", b =>
+                {
+                    b.HasOne("ApplicationCore.Entities.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.ComandaItem", b =>
+                {
+                    b.HasOne("ApplicationCore.Entities.Comanda", "Comanda")
+                        .WithMany()
+                        .HasForeignKey("IdComanda")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comanda");
                 });
 #pragma warning restore 612, 618
         }

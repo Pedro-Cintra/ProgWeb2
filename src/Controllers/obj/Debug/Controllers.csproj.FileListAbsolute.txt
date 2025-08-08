@@ -29,3 +29,4 @@
 /Users/pedrocintra/Projetos/ProgWeb2/src/Controllers/obj/Debug/Controllers.xml
 /Users/pedrocintra/Projetos/ProgWeb2/src/Controllers/obj/Debug/Controllers.pdb
 /Users/pedrocintra/Projetos/ProgWeb2/src/Controllers/obj/Debug/ref/Controllers.dll
+/Users/pedrocintra/Projetos/ProgWeb2/src/Controllers/obj/Debug/Controllers.sourcelink.json
