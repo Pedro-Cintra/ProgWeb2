@@ -4,28 +4,20 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Shared.Dtos.Comanda;
+using Shared.Dtos.ComandaItem;
 using Shared.Interfaces;
 
 namespace Controllers;
 
 [ApiController]
 [Route("[Controller]")]
-public class ComandaController : APIControllerBase
+public class ComandasController : APIControllerBase
 {
     private readonly IServiceManager _service;
 
-    public ComandaController(IServiceManager service, IMemoryCache cache)
+    public ComandasController(IServiceManager service, IMemoryCache cache)
     {
         _service = service;
-    }
-
-    [HttpPost]
-    [ServiceFilter(typeof(ValidationFilterAttribute))]
-    [ProducesResponseType(typeof(ReadComandaDto), StatusCodes.Status201Created)]
-    public async Task<IActionResult> Create([FromBody] CreateComandaDto parameters)
-    {
-        var retorno = await _service.Comanda.CreateAsync(parameters);
-        return StatusCode(StatusCodes.Status201Created, retorno);
     }
 
     [HttpGet]
@@ -41,7 +33,6 @@ public class ComandaController : APIControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var retorno = await _service.Comanda.DeleteAsync(id);
-        //TODO Ver qual código de status é o mais adequado
         return StatusCode(StatusCodes.Status200OK, retorno);
     }
 
@@ -51,5 +42,22 @@ public class ComandaController : APIControllerBase
     {
         var retorno = await _service.Comanda.GetAsync(id);
         return Ok(retorno);
+    }
+
+    [HttpPost]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    [ProducesResponseType(typeof(ReadComandaItemDto), StatusCodes.Status201Created)]
+    public async Task<IActionResult> Create([FromBody] CreateComandaItemDto parameters)
+    {
+        var retorno = await _service.ComandaItem.CreateAsync(parameters);
+        return StatusCode(StatusCodes.Status201Created, retorno);
+    }
+
+    [HttpPatch("{id:int}")]
+    [ProducesResponseType(typeof(ReadComandaProdutoDto), StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateComandaItemDto parameters)
+    {
+        await _service.ComandaItem.UpdateAsync(id, parameters);
+        return NoContent();
     }
 }

@@ -45,7 +45,7 @@ public class ComandaItemService : IComandaItemService
 
         ReadComandaItemDto retorno = new()
         {
-            Id = comandaItem.First().Id,
+            Id = comandaItem.First().IdComanda,
             IdUsuario = parameters.IdUsuario,
             NomeUsuario = parameters.NomeUsuario,
             TelefoneUsuario = parameters.TelefoneUsuario,
@@ -60,12 +60,12 @@ public class ComandaItemService : IComandaItemService
         return retorno;
     }
 
-    public async void UpdateAsync(int id, UpdateComandaItemDto parameters)
+    public async Task UpdateAsync(int id, UpdateComandaItemDto parameters)
     {
         Comanda comanda = await _repository.Comanda
             .FindByCondition(c => c.Id == id, true)
             .Include(c => c.ComandaItems)
-            .SingleOrDefaultAsync() ?? throw new ComandaNotFoundException(id);
+            .FirstOrDefaultAsync() ?? throw new ComandaNotFoundException(id);
 
         foreach (var item in parameters.Produtos)
         {
