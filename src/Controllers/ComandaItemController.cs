@@ -26,6 +26,14 @@ public class ComandaItemController : APIControllerBase
     public async Task<IActionResult> Create([FromBody] CreateComandaItemDto parameters)
     {
         var retorno = await _service.ComandaItem.CreateAsync(parameters);
-        return Ok(retorno);
+        return StatusCode(StatusCodes.Status201Created, retorno);
+    }
+
+    [HttpPatch("{id:int}")]
+    [ProducesResponseType(typeof(ReadComandaProdutoDto), StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateComandaItemDto parameters)
+    {
+         _service.ComandaItem.UpdateAsync(id, parameters);
+        return NoContent();
     }
 }

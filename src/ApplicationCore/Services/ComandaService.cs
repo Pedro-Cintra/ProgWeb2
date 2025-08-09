@@ -4,7 +4,6 @@ using ApplicationCore.Interfaces;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Shared.Dtos.Comanda;
-using Shared.Dtos.ComandaItem;
 using Shared.Dtos.Produto;
 using Shared.Interfaces;
 
@@ -32,6 +31,16 @@ public class ComandaService : IComandaService
         return _mapper.Map<ReadComandaDto>(comanda);
     }
 
+    public async Task<string> DeleteAsync(int id)
+    {
+        var comanda = await GetAndCheckAsync(id, true);
+
+        _repository.Comanda.Delete(comanda);
+        await _repository.SaveAsync();
+
+        return $"Comanda com id {id} deletada com sucesso."; 
+    }
+
     public async Task<IEnumerable<ReadComandaDto>> GetAllAsync()
     {
         var comandas = await _repository.Comanda
@@ -51,7 +60,7 @@ public class ComandaService : IComandaService
         return comanda;
     }
     
-    public async Task<ReadComandaItemDto> GetAsync(int id)
+    public async Task<ReadComandaProdutoDto> GetAsync(int id)
     {
         var comanda = await _repository.Comanda
             .FindByCondition(c => c.Id == id, false)
@@ -59,7 +68,7 @@ public class ComandaService : IComandaService
             .Include(c => c.ComandaItems)
             .SingleOrDefaultAsync() ?? throw new ComandaNotFoundException(id);
 
-        ReadComandaItemDto retorno = new()
+        ReadComandaProdutoDto retorno = new()
         { 
             Id = comanda.Id,
             IdUsuario = comanda.IdUsuario,
@@ -67,7 +76,7 @@ public class ComandaService : IComandaService
             TelefoneUsuario = comanda.Usuario.Telefone,
             Produtos = [.. comanda.ComandaItems.Select(p => new ProdutoDto
             {
-                Id = p.Id,
+                Id = p.Sequencia,
                 Nome = p.Produto,
                 Preco = (decimal)p.Preco
             })]

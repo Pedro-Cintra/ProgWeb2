@@ -25,7 +25,7 @@ public class ComandaItemService : IComandaItemService
 
     public async Task<ReadComandaItemDto> CreateAsync(CreateComandaItemDto parameters)
     {
-        
+
         CreateComandaDto createComandaDto = new()
         {
             IdUsuario = parameters.IdUsuario
@@ -44,7 +44,7 @@ public class ComandaItemService : IComandaItemService
         await _repository.SaveAsync();
 
         ReadComandaItemDto retorno = new()
-        { 
+        {
             Id = comandaItem.First().Id,
             IdUsuario = parameters.IdUsuario,
             NomeUsuario = parameters.NomeUsuario,
@@ -58,5 +58,25 @@ public class ComandaItemService : IComandaItemService
         };
 
         return retorno;
+    }
+
+    public async void UpdateAsync(int id, UpdateComandaItemDto parameters)
+    {
+        Comanda comanda = await _repository.Comanda
+            .FindByCondition(c => c.Id == id, true)
+            .Include(c => c.ComandaItems)
+            .SingleOrDefaultAsync() ?? throw new ComandaNotFoundException(id);
+
+        foreach (var item in parameters.Produtos)
+        {
+            var comandaItem = comanda.ComandaItems.FirstOrDefault(ci => ci.Sequencia == item.Id);
+            if (comandaItem != null)
+            {
+                comandaItem.Produto = item.Nome;
+                comandaItem.Preco = (double)item.Preco;
+            }
+        }
+
+        await _repository.SaveAsync();
     }
 }

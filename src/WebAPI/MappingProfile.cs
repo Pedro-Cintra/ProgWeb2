@@ -2,7 +2,9 @@
 using AutoMapper;
 using Shared.Dtos.Comanda;
 using Shared.Dtos.ComandaItem;
+using Shared.Dtos.Produto;
 using Shared.Dtos.Usuario;
+using WebAPI.Extensions;
 
 namespace WebAPI;
 
@@ -46,8 +48,30 @@ public class MappingProfile : Profile
             );
         CreateMap<CreateComandaDto, Comanda>();
         CreateMap<ReadComandaDto, Comanda>();
-        
+
         CreateMap<CreateComandaItemDto, ComandaItem>();
         CreateMap<ReadComandaItemDto, ComandaItem>();
+
+        CreateMap<UpdateComandaItemDto, ComandaItem>();
+
+        CreateMap<ProdutoDto, ComandaItem>()
+            .ForMember(
+                dest => dest.Sequencia,
+                opt => opt.MapFrom(src => src.Id)
+            )
+            .ForMember(
+                dest => dest.Produto,
+                opt => opt.MapFrom(src => src.Nome)
+            ).IgnoreNullsOnSource();
+
+        CreateMap<ComandaItem, ProdutoDto>()
+            .ForMember(
+                dest => dest.Id,
+                opt => opt.MapFrom(src => src.Sequencia)
+            )
+            .ForMember(
+                dest => dest.Nome,
+                opt => opt.MapFrom(src => src.Produto)
+            ).IgnoreNullsOnSource();
     }
 }

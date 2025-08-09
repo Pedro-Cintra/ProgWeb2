@@ -1,4 +1,5 @@
-﻿using ApplicationCore.Interfaces;
+﻿using ApplicationCore.Exceptions;
+using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Diagnostics;
 using Shared.Models;
 
@@ -22,6 +23,7 @@ public static class ExceptionMiddlewareExtensions
                 context.Response.StatusCode = contextFeature.Error switch
                 {
                     UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
+                    NotFoundException => StatusCodes.Status404NotFound,
                     _ => StatusCodes.Status500InternalServerError
                 };
 

@@ -25,7 +25,7 @@ public class ComandaController : APIControllerBase
     public async Task<IActionResult> Create([FromBody] CreateComandaDto parameters)
     {
         var retorno = await _service.Comanda.CreateAsync(parameters);
-        return Ok(retorno);
+        return StatusCode(StatusCodes.Status201Created, retorno);
     }
 
     [HttpGet]
@@ -35,9 +35,18 @@ public class ComandaController : APIControllerBase
         var retorno = await _service.Comanda.GetAllAsync();
         return Ok(retorno);
     }
-    
+
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(typeof(IEnumerable<ReadComandaDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var retorno = await _service.Comanda.DeleteAsync(id);
+        //TODO Ver qual código de status é o mais adequado
+        return StatusCode(StatusCodes.Status200OK, retorno);
+    }
+
     [HttpGet("{id:int}")]
-    [ProducesResponseType(typeof(ReadComandaDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ReadComandaProdutoDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> Get(int id)
     {
         var retorno = await _service.Comanda.GetAsync(id);

@@ -4,5 +4,5 @@ namespace Shared.Dtos.Comanda;
 
 public record ReadComandaProdutoDto : ReadComandaDto
 {
-  public ProdutoDto Produto { get; set; }
+  public ProdutoDto[] Produtos { get; set; } = [];
 }
